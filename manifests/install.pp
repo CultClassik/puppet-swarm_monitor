@@ -20,7 +20,7 @@ class swarm_monitor::install {
       {
         'traefik_hostname_influxdb'    => $::swarm_monitor::traefik_hostname_influxdb,
         'traefik_hostname_grafana'     => $::swarm_monitor::traefik_hostname_grafana,
-        'traefik_proxy_overlay'        => $::swarm_monitor::traefik_proxy_overlay
+        'traefik_proxy_overlay'        => $::swarm_monitor::traefik_proxy_overlay,
         'grafana_docker_image'         => $::swarm_monitor::grafana_docker_image,
         'grafana_volume'               => $::swarm_monitor::grafana_volume,
         'influxdb_docker_image'        => $::swarm_monitor::influxdb_docker_image,
