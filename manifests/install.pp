@@ -23,6 +23,8 @@ class swarm_monitor::install {
         'traefik_proxy_overlay'        => $::swarm_monitor::traefik_proxy_overlay,
         'grafana_docker_image'         => $::swarm_monitor::grafana_docker_image,
         'grafana_volume'               => $::swarm_monitor::grafana_volume,
+        'grafana_admin_user'           => $::swarm_monitor::grafana_admin_user
+        'grafana_admin_pass'           => $::swarm_monitor::grafana_admin_pass
         'influxdb_docker_image'        => $::swarm_monitor::influxdb_docker_image,
         'influxdb_http_auth_enabled'   => $::swarm_monitor::influxdb_http_auth_enabled,
         'influxdb_admin_user'          => $::swarm_monitor::influxdb_admin_user,
