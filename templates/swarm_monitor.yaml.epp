@@ -35,8 +35,6 @@ services:
     networks:
       - <%= $traefik_proxy_overlay %>
       - swarm_monitor
-    depends_on:
-      - cadvisor
 
   grafana:
     container_name: grafana
