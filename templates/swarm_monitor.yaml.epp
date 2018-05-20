@@ -37,7 +37,6 @@ services:
       - swarm_monitor
 
   grafana:
-    container_name: grafana
     image: <%= $grafana_docker_image %>
     # Use env vars instead of managing config file
     environment:
