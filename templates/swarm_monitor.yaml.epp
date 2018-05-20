@@ -1,0 +1,81 @@
+---
+version: '3.2'
+
+services:
+  influxdb:
+    image: <%= $influxdb_docker_image %>
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 20
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=web-tier"
+        - "traefik.httpapi.port=8086"
+        - "traefik.httpapi.frontend.rule=Host:<%= $traefik_hostname_influxdb %>"
+    environment:
+      - INFLUXDB_HTTP_AUTH_ENABLED:<%= $influxdb_http_auth_enabled %>
+      - INFLUXDB_DB:<%= $influxdb_db %>
+      - INFLUXDB_ADMIN_USER:<%= $influxdb_admin_user %>
+      - INFLUXDB_ADMIN_PASSWORD:<%= $influxdb_admin_password %>
+      - INFLUXDB_USER:<%= $influxdb_user %>
+      - INFLUXDB_USER_PASSWORD:<%= $influxdb_user_password %>
+      - INFLUXDB_READ_USER:<%= $influxdb_read_user %>
+      - INFLUXDB_READ_USER_PASSWORD:<%= $influxdb_read_user_password %>
+      - INFLUXDB_WRITE_USER:<%= $influxdb_write_user %>
+      - INFLUXDB_WRITE_USER_PASSWORD:<%= $influxdb_write_user_password %>
+      - INFLUXDB_RETENTION_ENABLED:true
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      #- <%= $influxdb_volume %>/influxdb.conf:/etc/influxdb/influxdb.conf:ro
+      - <%= $influxdb_volume %>:/var/lib/influxdb
+    networks:
+      - <%= $traefik_proxy_overlay %>
+      - swarm_monitor
+    depends_on:
+      - cadvisor
+
+  grafana:
+    container_name: grafana
+    image: <%= $grafana_docker_image %>
+    # Use env vars instead of managing config file
+    environment:
+      - "GF_SECURITY_ADMIN_USER=<%= $grafana_admin_user %>"
+      - "GF_SECURITY_ADMIN_PASSWORD=<%= $grafana_admin_pass %>"
+      - "GF_USERS_ALLOW_SIGN_UP=false"
+      - "GF_SERVER_ROOT_URL=http://<%= $traefik_hostname_grafana %>"
+    deploy:
+      mode: replicated
+      # update with more replicas once standalone is working!
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 10
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=web-tier"
+        - "traefik.port=3000"
+        - "traefik.frontend.entryPoints=http"
+        - "traefik.backend=grafana"
+        - "traefik.frontend.rule=Host:<%= $traefik_hostname_grafana %>"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - <%= $grafana_volume %>:/var/lib/grafana
+    #env_file:
+    #  - config.monitoring
+    networks:
+      - <%= $traefik_proxy_overlay %>
+      - swarm_monitor
+    depends_on:
+      - influxdb
+
+networks:
+  proxy:
+    external:
+      name: <%= $traefik_proxy_overlay %>
+  swarm_monitor:
+    driver: overlay
