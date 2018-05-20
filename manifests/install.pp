@@ -13,13 +13,14 @@ class swarm_monitor::install {
     mode   => '0644',
   }
 
-  file { $::swarm_monitor::compose_file :
+  file { $::swarm_monitor::compose_file:
     ensure  => file,
     content => epp(
       'swarm_monitor/swarm_monitor.yaml.epp',
       {
         'traefik_hostname_influxdb'    => $::swarm_monitor::traefik_hostname_influxdb,
         'traefik_hostname_grafana'     => $::swarm_monitor::traefik_hostname_grafana,
+        'traefik_proxy_overlay'        => $::swarm_monitor::traefik_proxy_overlay
         'grafana_docker_image'         => $::swarm_monitor::grafana_docker_image,
         'grafana_volume'               => $::swarm_monitor::grafana_volume,
         'influxdb_docker_image'        => $::swarm_monitor::influxdb_docker_image,

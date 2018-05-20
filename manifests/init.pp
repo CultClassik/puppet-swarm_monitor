@@ -11,6 +11,7 @@ class swarm_monitor (
   String $compose_file,
   String $traefik_hostname_influxdb,
   String $traefik_hostname_grafana,
+  String $traefik_proxy_overlay,
   String $grafana_docker_image,
   String $grafana_volume,
   String $grafana_admin_user,
@@ -30,10 +31,10 @@ class swarm_monitor (
   Hash $influxdb_share = {},
 ){
 
-  contain swarm_monitor::install
-  contain swarm_monitor::config
+  contain ::swarm_monitor::install
+  contain ::swarm_monitor::config
 
-  Class[swarm_monitor::install]
-  -> Class[swarm_monitor::config]
+  Class[::swarm_monitor::install]
+  -> Class[::swarm_monitor::config]
 
 }
