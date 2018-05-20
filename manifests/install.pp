@@ -16,7 +16,7 @@ class swarm_monitor::install {
   file { $::swarm_monitor::compose_file :
     ensure  => file,
     content => epp(
-      'profile/docker/stacks/monitoring/stack.yaml.epp',
+      'swarm_monitor/swarm_monitor.yaml.epp',
       {
         'traefik_hostname_influxdb'    => $::swarm_monitor::traefik_hostname_influxdb,
         'traefik_hostname_grafana'     => $::swarm_monitor::traefik_hostname_grafana,

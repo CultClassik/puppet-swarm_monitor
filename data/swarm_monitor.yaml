@@ -1,8 +1,8 @@
 swarm_monitor::traefik_hostname_influxdb: idb.diehlabs.lan
 swarm_monitor::traefik_hostname_grafana: mon.diehlabs.lan
 swarm_monitor::traefik_proxy_overlay: web-tier
-swarm_monitor::stack_name: 'monitoring'
-swarm_monitor::compose_file: '/tmp/monitoring_stack.yaml'
+swarm_monitor::stack_name: 'swarm_monitor'
+swarm_monitor::compose_file: '/tmp/swarm_monitor_stack.yaml'
 swarm_monitor::grafana_docker_image: 'grafana/grafana:5.1.3'
 swarm_monitor::grafana_volume: '/mnt/dockerdata/grafana'
 swarm_monitor::grafana_admin_user: admin
