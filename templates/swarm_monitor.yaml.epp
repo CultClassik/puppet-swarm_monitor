@@ -89,7 +89,7 @@ services:
       - influxdb
     ports:
       - "<%= $cadvisor_http_port %>:8080/tcp"
-    command: "-storage_driver=influxdb -storage_driver_db=cadvisor_db -storage_driver_user= <%= $cadvisor_storage_driver_user %> -storage_driver_password=<%= $cadvisor_storage_driver_password %> -storage_driver_host=<%= $cadvisor_storage_driver_host %>"
+    command: "-storage_driver=influxdb -storage_driver_db=cadvisor_db -storage_driver_user= <%= $cadvisor_storage_driver_user %> -storage_driver_password=<%= $cadvisor_storage_driver_pass %> -storage_driver_host=<%= $cadvisor_storage_driver_host %>"
 
 networks:
   proxy:
