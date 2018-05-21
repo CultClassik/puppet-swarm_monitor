@@ -33,7 +33,9 @@ If there's more that they should know about, though, this is the place to mentio
 
 ### Setup Requirements **OPTIONAL**
 
-Requires that you have a functional Docker Swarm cluster to deploy to.
+Must have a functional Docker Swarm cluster to deploy to.
+
+Must have an instance of Traefik running on your Swarm cluster.
 
 ### Beginning with swarm_monitor
 

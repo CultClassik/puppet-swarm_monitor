@@ -28,7 +28,11 @@ class swarm_monitor (
   String $influxdb_read_user_password,
   String $influxdb_write_user,
   String $influxdb_write_user_password,
-  Hash $influxdb_share = {},
+  Hash $influxdb_share,
+  String $cadvisor_image_name,
+  String $cadvisor_storage_driver_user,
+  String $cadvisor_storage_driver_pass,
+  String $cadvisor_storage_driver_host,
 ){
 
   contain ::swarm_monitor::install

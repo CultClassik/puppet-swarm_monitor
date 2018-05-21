@@ -23,3 +23,8 @@ swarm_monitor::influxdb_share:
     path: '/mnt/data/influx_main'
     server: 'dagon.diehlabs.lan'
     share: '/mnt/ssd/influx_main'
+swarm_monitor::cadvisor_docker_image: 'google/cadvisor:latest'
+swarm_monitor::cadvisor_storage_driver_user: 'cadvisor_user'
+swarm_monitor::cadvisor_storage_driver_pass: 'cadvisor_pass'
+swarm_monitor::cadvisor_storage_driver_host: "%{lookup('swarm_monitor::traefik_hostname_influxdb')"
+swarm_monitor::cadvisor_http_port: '8088'

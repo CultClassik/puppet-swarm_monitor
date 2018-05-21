@@ -70,6 +70,27 @@ services:
     depends_on:
       - influxdb
 
+  cadvisor:
+    image: <%= cadvisor_docker_image %>
+    deploy:
+      mode: global
+      labels:
+        - "traefik.enable=false"
+    volumes:
+      - '/etc/localtime:/etc/localtime:ro'
+      - '/var/lib/docker/:/var/lib/docker:ro'
+      - '/dev/disk/:/dev/disk:ro'
+      - '/sys:/sys:ro'
+      - '/:/rootfs:ro'
+      - '/var/run:/var/run'
+    networks:
+      - swarm_monitor
+    depends_on:
+      - influxdb
+    ports:
+      - <%= $cadvisor_http_port %>:8080/tcp
+    command: "-storage_driver=influxdb -storage_driver_db=cadvisor_db -storage_driver_user= <%= $cadvisor_storage_driver_user %> -storage_driver_password=<%= $cadvisor_storage_driver_password %> -storage_driver_host=<%= $cadvisor_storage_driver_host %>"
+
 networks:
   proxy:
     external:

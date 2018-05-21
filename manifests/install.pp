@@ -37,6 +37,11 @@ class swarm_monitor::install {
         'influxdb_write_user'          => $::swarm_monitor::influxdb_write_user,
         'influxdb_write_user_password' => $::swarm_monitor::influxdb_write_user_password,
         'influxdb_volume'              => $::swarm_monitor::influxdb_share['path'],
+        'cadvisor_docker_image'        => $::swarm_monitor::cadvisor_docker_image,
+        'cadvisor_storage_driver_user' => $::swarm_monitor::cadvisor_storage_driver_user,
+        'cadvisor_storage_driver_pass' => $::swarm_monitor::cadvisor_storage_driver_password,
+        'cadvisor_storage_driver_host' => $::swarm_monitor::cadvisor_storage_driver_host,
+        'cadvisor_http_port'           => $::swarm_monitor::cadvisor_http_port,
       }
     ),
   }
