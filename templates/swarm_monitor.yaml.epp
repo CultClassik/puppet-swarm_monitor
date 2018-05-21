@@ -71,6 +71,7 @@ services:
       - influxdb
 
   cadvisor:
+    hostname: '{{.Node.Hostname}}'
     image: <%= $cadvisor_docker_image %>
     deploy:
       mode: global
