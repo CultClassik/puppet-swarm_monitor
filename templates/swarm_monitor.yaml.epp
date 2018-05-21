@@ -71,7 +71,7 @@ services:
       - influxdb
 
   cadvisor:
-    image: <%= cadvisor_docker_image %>
+    image: <%= $cadvisor_docker_image %>
     deploy:
       mode: global
       labels:
