@@ -33,7 +33,7 @@ services:
       #- <%= $influxdb_volume %>/influxdb.conf:/etc/influxdb/influxdb.conf:ro
       - <%= $influxdb_volume %>:/var/lib/influxdb
     networks:
-      - <%= $traefik_proxy_overlay %>
+      - proxy
       - swarm_monitor
 
   grafana:
@@ -65,7 +65,7 @@ services:
     #env_file:
     #  - config.monitoring
     networks:
-      - <%= $traefik_proxy_overlay %>
+      - proxy
       - swarm_monitor
     depends_on:
       - influxdb
