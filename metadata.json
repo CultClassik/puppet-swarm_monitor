@@ -1,6 +1,6 @@
 {
   "name": "cultclassik-swarm_monitor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Chris Diehl",
   "summary": "Installs and configures Grafana and InfluxDB containers as a Docker Swarm stack.",
   "license": "MIT",
